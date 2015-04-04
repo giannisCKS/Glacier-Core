@@ -1,9 +1,11 @@
 package com.joeyblankendaal.glacier.core;
 
-import com.joeyblankendaal.glacier.core.command.Heal;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.joeyblankendaal.glacier.core.command.Heal;
 import com.joeyblankendaal.glacier.core.command.More;
+import com.joeyblankendaal.glacier.core.event.player.Join;
+import com.joeyblankendaal.glacier.core.event.player.Quit;
 
 public class Main extends JavaPlugin {
     @Override
@@ -26,6 +28,12 @@ public class Main extends JavaPlugin {
         getConfig().addDefault("commands.more.messages.errors.no-item-in-hand", "&cYou currently have no item in your hand.");
         getConfig().addDefault("commands.more.messages.successes.self", "&aYou now have a stack of &e<item>&a.");
 
+        getConfig().addDefault("events.join.enabled", true);
+        getConfig().addDefault("events.join.messages.notify", "&e<player> has joined the game.");
+
+        getConfig().addDefault("events.quit.enabled", true);
+        getConfig().addDefault("events.quit.messages.notify", "&e<player> has left the game.");
+
         getConfig().addDefault("messages.errors.no-permission", "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
         getConfig().addDefault("messages.errors.only-console", "&cOnly the console can perform this command.");
         getConfig().addDefault("messages.errors.only-players", "&cOnly players can perform this command.");
@@ -39,6 +47,16 @@ public class Main extends JavaPlugin {
         saveConfig();
 
         System.out.println("&f[&b" + getDescription().getName() + "&f] &aConfigurations loaded...");
+
+        if (getConfig().getBoolean("events.join.enabled")) {
+            getServer().getPluginManager().registerEvents(new Join(this), this);
+        }
+
+        if (getConfig().getBoolean("events.quit.enabled")) {
+            getServer().getPluginManager().registerEvents(new Quit(this), this);
+        }
+
+        System.out.println("&f[&b" + getDescription().getName() + "&f] &aEvents loaded...");
 
         if (getConfig().getBoolean("commands.heal.enabled")) {
             getCommand("heal").setExecutor(new Heal(this));
