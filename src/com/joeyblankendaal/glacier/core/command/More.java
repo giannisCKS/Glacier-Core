@@ -28,20 +28,20 @@ public class More implements CommandExecutor {
                     itemInHand = player.getInventory().getItemInHand();
 
                     if (itemInHand.getType() == Material.AIR) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("commands.more.messages.errors.no-item-in-hand")));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("commands.more.messages.errors.no-item-in-hand")));
                     } else {
                         itemInHand.setAmount(64);
 
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("commands.more.messages.successes.main").replaceAll("<item>", itemInHand.toString())));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + plugin.getConfig().getString("commands.more.messages.successes.self").replaceAll("<item>", itemInHand.toString())));
                     }
                 } else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.errors.too-many-arguments").replaceAll("<usage>", "/more")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.too-many-arguments").replaceAll("<usage>", "/more")));
                 }
             } else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.errors.no-permission")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.no-permission")));
             }
         } else {
-            System.out.println(ChatColor.translateAlternateColorCodes('&', "&f[&b" + plugin.getDescription().getName() + "&f] " + plugin.getConfig().getString("messages.errors.only-players")));
+            System.out.println(ChatColor.translateAlternateColorCodes('&', "&f[&b" + plugin.getDescription().getName() + "&f] &c" + plugin.getConfig().getString("messages.errors.only-players")));
         }
 
         return false;
