@@ -1,0 +1,8 @@
+name: Glacier-Core
+version: 1.0.0
+main: com.joeyblankendaal.glacier.core.Main
+author: Joey Blankendaal
+
+commands:
+  more:
+    description: Sets the amount of the item in a player's hand to 64.
