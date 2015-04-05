@@ -4,9 +4,11 @@ main: com.joeyblankendaal.glacier.core.Main
 author: Joey Blankendaal
 
 commands:
+  feed:
+    description: Sets a player's hunger to 20, restoring it fully.
   heal:
     description: Sets a player's health to 20, restoring it fully.
   more:
     description: Sets the amount of the item in a player's hand to 64.
-  weathers:
+  weather:
     description: Sets a world's weather to either sunny or stormy.

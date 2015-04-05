@@ -1,5 +1,6 @@
 package com.joeyblankendaal.glacier.core;
 
+import com.joeyblankendaal.glacier.core.command.Feed;
 import com.joeyblankendaal.glacier.core.command.Weather;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getConfig().addDefault("commands.feed.enabled", true);
+        getConfig().addDefault("commands.feed.messages.successes.self", "&aYour hunger has been fully restored.");
+        getConfig().addDefault("commands.feed.messages.successes.others-player", "&e<target>&a's hunger has been fully restored.");
+        getConfig().addDefault("commands.feed.messages.successes.others-target", "&aYour hunger has been fully restored by &e<player>&a.");
+
         getConfig().addDefault("commands.heal.enabled", true);
         getConfig().addDefault("commands.heal.messages.successes.self", "&aYour health has been fully restored.");
         getConfig().addDefault("commands.heal.messages.successes.others-player", "&e<target>&a's health has been fully restored.");
@@ -62,6 +68,10 @@ public class Main extends JavaPlugin {
         }
 
         System.out.println("&f[&b" + getDescription().getName() + "&f] &aEvents loaded...");
+
+        if (getConfig().getBoolean("commands.feed.enabled")) {
+            getCommand("feed").setExecutor(new Feed(this));
+        }
 
         if (getConfig().getBoolean("commands.heal.enabled")) {
             getCommand("heal").setExecutor(new Heal(this));

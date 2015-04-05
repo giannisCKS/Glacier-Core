@@ -31,13 +31,13 @@ public class Weather implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("clear") || args[0].equalsIgnoreCase("sun") || args[0].equalsIgnoreCase("sunny")) {
                         world.setStorm(false);
 
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("commands.weather.messages.successes.self").replaceAll("<type>", "sunny")));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + plugin.getConfig().getString("commands.weather.messages.successes.self").replaceAll("<type>", "sunny")));
                     } else if (args[0].equalsIgnoreCase("rain") || args[0].equalsIgnoreCase("rainy") || args[0].equalsIgnoreCase("storm") || args[0].equalsIgnoreCase("stormy")) {
                         world.setStorm(true);
 
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("commands.weather.messages.successes.self").replaceAll("<type>", "stormy")));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + plugin.getConfig().getString("commands.weather.messages.successes.self").replaceAll("<type>", "stormy")));
                     } else {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("commands.weather.messages.errors.invalid-type")));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("commands.weather.messages.errors.invalid-type")));
                     }
                 } else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.too-many-arguments").replaceAll("<usage>", "/weather <type>")));
