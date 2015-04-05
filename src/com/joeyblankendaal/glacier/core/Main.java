@@ -1,5 +1,6 @@
 package com.joeyblankendaal.glacier.core;
 
+import com.joeyblankendaal.glacier.core.command.Weather;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.joeyblankendaal.glacier.core.command.Heal;
@@ -27,6 +28,10 @@ public class Main extends JavaPlugin {
         getConfig().addDefault("commands.more.enabled", true);
         getConfig().addDefault("commands.more.messages.errors.no-item-in-hand", "&cYou currently have no item in your hand.");
         getConfig().addDefault("commands.more.messages.successes.self", "&aYou now have a stack of &e<item>&a.");
+
+        getConfig().addDefault("commands.weather.enabled", true);
+        getConfig().addDefault("commands.weather.messages.errors.invalid-type", "&e<type> &ais not a valid weather type.");
+        getConfig().addDefault("commands.weather.messages.successes.self", "&aThe weather in has been set to &e<type>&a.");
 
         getConfig().addDefault("events.join.enabled", true);
         getConfig().addDefault("events.join.messages.notify", "&e<player> has joined the game.");
@@ -64,6 +69,10 @@ public class Main extends JavaPlugin {
 
         if (getConfig().getBoolean("commands.more.enabled")) {
             getCommand("more").setExecutor(new More(this));
+        }
+
+        if (getConfig().getBoolean("commands.weather.enabled")) {
+            getCommand("weather").setExecutor(new Weather(this));
         }
 
         System.out.println("&f[&b" + getDescription().getName() + "&f] &aCommands loaded...");

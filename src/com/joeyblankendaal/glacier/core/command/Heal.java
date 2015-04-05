@@ -23,8 +23,6 @@ public class Heal implements CommandExecutor {
             player = (Player) sender;
 
             if (player.hasPermission("glacier.core.heal") || player.isOp()) {
-                ChatColor.translateAlternateColorCodes('&', "&a" + plugin.getConfig().getString("commands.heal.messages.successes.self"));
-            } else {
                 if (args.length == 0) {
                     player.setHealth(20.0);
 
@@ -46,6 +44,8 @@ public class Heal implements CommandExecutor {
                 } else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.too-many-arguments").replaceAll("<usage>", "/heal [player]")));
                 }
+            } else {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.no-permission")));
             }
         } else {
             if (args.length == 0) {
