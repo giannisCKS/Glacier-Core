@@ -8,6 +8,8 @@ commands:
     description: Sets a player's hunger to 20, restoring it fully.
   heal:
     description: Sets a player's health to 20, restoring it fully.
+  kill:
+    description: Kills a player by setting the health to 0.
   more:
     description: Sets the amount of the item in a player's hand to 64.
   weather:

@@ -32,7 +32,7 @@ public class Feed implements CommandExecutor {
                     target = Bukkit.getPlayer(args[0]);
 
                     if (target == null) {
-                        System.out.println(ChatColor.translateAlternateColorCodes('&', "&f[&b" + plugin.getDescription().getName() + "&f] &c" + plugin.getConfig().getString("messages.errors.player-not-online")));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + plugin.getConfig().getString("messages.errors.player-not-online")));
                     } else {
                         target.setExhaustion(0);
                         target.setFoodLevel(20);

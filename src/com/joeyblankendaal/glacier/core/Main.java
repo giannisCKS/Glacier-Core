@@ -1,11 +1,8 @@
 package com.joeyblankendaal.glacier.core;
 
-import com.joeyblankendaal.glacier.core.command.Feed;
-import com.joeyblankendaal.glacier.core.command.Weather;
+import com.joeyblankendaal.glacier.core.command.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.joeyblankendaal.glacier.core.command.Heal;
-import com.joeyblankendaal.glacier.core.command.More;
 import com.joeyblankendaal.glacier.core.event.player.Join;
 import com.joeyblankendaal.glacier.core.event.player.Quit;
 
@@ -30,6 +27,11 @@ public class Main extends JavaPlugin {
         getConfig().addDefault("commands.heal.messages.successes.self", "&aYour health has been fully restored.");
         getConfig().addDefault("commands.heal.messages.successes.others-player", "&e<target>&a's health has been fully restored.");
         getConfig().addDefault("commands.heal.messages.successes.others-target", "&aYour health has been fully restored by &e<player>&a.");
+
+        getConfig().addDefault("commands.kill.enabled", true);
+        getConfig().addDefault("commands.kill.messages.successes.self", "&aYou have killed yourself.");
+        getConfig().addDefault("commands.kill.messages.successes.others-player", "&e<target>&a has been killed.");
+        getConfig().addDefault("commands.kill.messages.successes.others-target", "&aYou have been killed by &e<player>&a.");
 
         getConfig().addDefault("commands.more.enabled", true);
         getConfig().addDefault("commands.more.messages.errors.no-item-in-hand", "&cYou currently have no item in your hand.");
@@ -75,6 +77,10 @@ public class Main extends JavaPlugin {
 
         if (getConfig().getBoolean("commands.heal.enabled")) {
             getCommand("heal").setExecutor(new Heal(this));
+        }
+
+        if (getConfig().getBoolean("commands.kill.enabled")) {
+            getCommand("kill").setExecutor(new Kill(this));
         }
 
         if (getConfig().getBoolean("commands.more.enabled")) {
