@@ -1,6 +1,7 @@
 package com.joeyblankendaal.glacier.core;
 
 import com.joeyblankendaal.glacier.core.command.*;
+import com.joeyblankendaal.glacier.core.event.server.PingList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.joeyblankendaal.glacier.core.event.player.Join;
@@ -44,6 +45,9 @@ public class Main extends JavaPlugin {
         getConfig().addDefault("events.join.enabled", true);
         getConfig().addDefault("events.join.messages.notify", "&e<player> has joined the game.");
 
+        getConfig().addDefault("events.ping-list.enabled", true);
+        getConfig().addDefault("events.ping-list.settings.max-players", 20);
+
         getConfig().addDefault("events.quit.enabled", true);
         getConfig().addDefault("events.quit.messages.notify", "&e<player> has left the game.");
 
@@ -63,6 +67,10 @@ public class Main extends JavaPlugin {
 
         if (getConfig().getBoolean("events.join.enabled")) {
             getServer().getPluginManager().registerEvents(new Join(this), this);
+        }
+
+        if (getConfig().getBoolean("events.ping-list.enabled")) {
+            getServer().getPluginManager().registerEvents(new PingList(this), this);
         }
 
         if (getConfig().getBoolean("events.quit.enabled")) {
